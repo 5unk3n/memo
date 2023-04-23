@@ -1,0 +1,170 @@
+.a11y-hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+/* Resets ------------------- */
+:root {
+  font-size: 62.5%;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+ol {
+  margin: initial;
+  margin: initial;
+}
+
+ol {
+  padding: initial;
+  list-style-type: none;
+}
+
+input,
+textarea,
+button {
+  border: initial;
+  font-family: inherit;
+  font-size: inherit;
+  background-color: initial;
+}
+
+/* Layouts ------------------- */
+main {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* write-section */
+.write-section {
+  padding: 32px;
+  flex: 0 0 300px;
+}
+
+.memo-write {
+  width: auto;
+  padding: 16px;
+  border: 1px solid #6d6d6d;
+  border-radius: 4px;
+  position: relative;
+}
+
+.write-title {
+  width: 100%;
+}
+
+.write-content {
+  width: 100%;
+  resize: none;
+}
+
+.write-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+/* view-section */
+.view-section {
+  padding: 32px 0;
+  flex-grow: 1;
+}
+
+.view-section > * {
+  padding: 0 32px;
+}
+
+.memo-list {
+  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 220px);
+  justify-content: center;
+  overflow-y: scroll;
+  height: 80vh;
+}
+
+.memo-article {
+  background-color: lightyellow;
+  height: 200px;
+}
+
+/* Style ------------------- */
+body {
+  background-color: #444;
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.section-title {
+  margin-bottom: 3rem;
+}
+
+.view-section {
+  background-color: #eee;
+  color: #000;
+  /* margin: 2rem; */
+  border-radius: 10px 0 0 10px;
+}
+
+.memo-article {
+  position: relative;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 rgb(0, 0, 0, 0.3);
+}
+
+.memo-article > h2 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.memo-article > p {
+  width: auto;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+
+.memo-article > button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.memo-article:hover {
+  border-radius: 4px;
+  box-shadow: 0 2px 8px 0 rgb(0, 0, 0, 0.7);
+  transition: box-shadow 0.2s;
+}
+
+.write-title,
+.write-content {
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+}
+
+.write-title {
+  height: 3rem;
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.write-button {
+  border-radius: 50%;
+  border: 3px solid lightgoldenrodyellow;
+  color: lightgoldenrodyellow;
+  font-weight: bold;
+}
