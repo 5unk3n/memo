@@ -14,12 +14,27 @@ class WriteMemo {
     this.$element.className = "write-section";
     this.$target.appendChild(this.$element);
 
+    this.$element.addEventListener("submit", (e) => {
+      e.preventDefault();
+      addMemo({
+        title: this.$element.querySelector(".write-title").value,
+        content: this.$element.querySelector(".write-content").value,
+        date: new Date().toLocaleString(),
+        len: this.state.memos.length,
+      });
+    });
+
     this.render();
   }
 
-  render() {
+  setState = (nextState) => {
+    this.state = nextState;
+    this.render();
+  };
+
+  render = () => {
     this.$element.innerHTML = `
-      <h2>📝메모 작성</h2>
+      <h2 class="section-title">📝메모 작성</h2>
       <form class="memo-write">
         <label class="a11y-hidden" for="writeTitle">제목 작성</label>
         <input
@@ -38,19 +53,7 @@ class WriteMemo {
         <button type="submit" class="write-button"">+</button>
       </form>
     `;
-
-    this.$element
-      .querySelector(".write-button")
-      .addEventListener("click", (e) => {
-        e.preventDefault();
-        this.addMemo({
-          title: this.$element.querySelector(".write-title").value,
-          content: this.$element.querySelector(".write-content").value,
-          date: new Date().toLocaleString(),
-          len: this.state.memos.length,
-        });
-    });
-  }
+  };
 }
 
 export default WriteMemo;

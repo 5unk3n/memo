@@ -9,21 +9,6 @@ class App {
       memos: JSON.parse(localStorage.getItem("allMemo")) ?? [],
     };
 
-    this.render();
-  }
-
-  // 상태 설정
-  setState = (newState) => {
-    this.state = {
-      ...this.state,
-      ...newState,
-    };
-    this.render();
-  };
-
-  // 렌더링
-  render() {
-    this.$target.innerHTML = "";
     const writeMemo = new WriteMemo({
       $target: this.$target,
       state: this.state,
@@ -34,6 +19,19 @@ class App {
       state: this.state,
       removeMemo: this.removeMemo,
     });
+
+    this.setState = (newState) => {
+      this.state = {
+        ...this.state,
+        ...newState,
+      };
+      writeMemo.setState({
+        memos: this.state.memos,
+      });
+      showMemo.setState({
+        memos: this.state.memos,
+      });
+    };
   }
 
   // 이벤트

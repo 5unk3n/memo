@@ -13,21 +13,21 @@ class ShowMemo {
     this.$element.className = "view-section";
     this.$target.appendChild(this.$element);
 
+    this.$element.addEventListener("click", (e) => this.removeMemo(e));
+
     this.render();
   }
-  
+
   setState = (newState) => {
-    this.state = {
-      ...this.state,
-      ...newState,
-    };
+    this.state = newState;
     this.render();
   };
+
   render() {
     const { memos } = this.state;
 
     this.$element.innerHTML = `
-      <h2>메모 목록</h2>
+      <h2 class="section-title">메모 목록</h2>
       <ol id="memoList" class="memo-list">
       ${memos
         .map(
@@ -43,8 +43,6 @@ class ShowMemo {
         .join("")}
       </ol>
     `;
-
-    this.$element.addEventListener("click", (e) => this.removeMemo(e));
   }
 }
 
