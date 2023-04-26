@@ -19,9 +19,12 @@ h1,
 h2,
 h3,
 p,
-ol {
+ol,
+button,
+input,
+textarea {
   margin: initial;
-  margin: initial;
+  padding: initial;
 }
 
 ol {
@@ -65,13 +68,8 @@ main {
 
 .write-content {
   width: 100%;
+  margin-bottom: 16px;
   resize: none;
-}
-
-.write-button {
-  position: absolute;
-  top: 16px;
-  right: 16px;
 }
 
 /* view-section */
@@ -90,7 +88,7 @@ main {
   grid-template-columns: repeat(auto-fill, 220px);
   justify-content: center;
   overflow-y: scroll;
-  height: 80vh;
+  max-height: 80vh;
 }
 
 .memo-article {
@@ -123,12 +121,13 @@ body {
   box-shadow: 0 2px 4px 0 rgb(0, 0, 0, 0.3);
 }
 
-.memo-article > h2 {
+.memo-title {
   text-overflow: ellipsis;
   overflow: hidden;
+  margin-bottom: 0.5rem;
 }
 
-.memo-article > p {
+.memo-content {
   width: auto;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -137,16 +136,23 @@ body {
   -webkit-line-clamp: 5;
 }
 
-.memo-article > button {
+.memo-date {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  bottom: 10px;
+  color: #999;
 }
 
-.memo-article:hover {
+.remove-btn {
+  position: absolute;
+  padding: 5px;
+  top: 5px;
+  right: 5px;
+  color: lightcoral;
+}
+
+.remove-btn:hover {
   border-radius: 4px;
-  box-shadow: 0 2px 8px 0 rgb(0, 0, 0, 0.7);
-  transition: box-shadow 0.2s;
+  box-shadow: 0 0 4px lightcoral;
 }
 
 .write-title,
@@ -163,8 +169,15 @@ body {
 }
 
 .write-button {
-  border-radius: 50%;
-  border: 3px solid lightgoldenrodyellow;
-  color: lightgoldenrodyellow;
   font-weight: bold;
+  width: 100%;
+  padding: 4px;
+  border-radius: 4px;
+  color: lightyellow;
+  border: 2px solid lightyellow;
+}
+
+.write-button:hover {
+  color: #333;
+  background-color: lightyellow;
 }

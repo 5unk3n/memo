@@ -9,35 +9,30 @@ class ShowMemo {
     this.state = state;
     this.removeMemo = removeMemo;
 
-    this.$element = document.createElement("section");
-    this.$element.className = "view-section";
-    this.$target.appendChild(this.$element);
-
-    this.$element.addEventListener("click", (e) => this.removeMemo(e));
+    this.$target.addEventListener("click", (e) => {
+      if (e.target.closest(".remove-btn")) {
+        this.removeMemo(e.target.id);
+      }
+    });
 
     this.render();
   }
 
-  setState = (newState) => {
-    this.state = newState;
-    this.render();
-  };
-
   render() {
     const { memos } = this.state;
 
-    this.$element.innerHTML = `
+    this.$target.innerHTML = `
       <h2 class="section-title">메모 목록</h2>
       <ol id="memoList" class="memo-list">
       ${memos
         .map(
           (memo) => `
-        <li id=memo${memo.len + 1} class="memo-article">
-        <p>${memo.len + 1}</p>
-        <h2>${memo.title}</h2>
-        <p>${memo.content}</p>
-        <p>${memo.date}</p>
-        <button id=${memo.len} class="remove-btn">삭제</button></li>
+        <li id=memo${memo.id} class="memo-article">
+        <p class="memo-id">${memo.id}번째 메모</p>
+        <h2 class="memo-title">${memo.title}</h2>
+        <p class="memo-content">${memo.content}</p>
+        <p class="memo-date">${memo.date}</p>
+        <button id=${memo.id} class="remove-btn">삭제</button></li>
       `
         )
         .join("")}
@@ -47,15 +42,3 @@ class ShowMemo {
 }
 
 export default ShowMemo;
-
-/**
- * app이랑 초기상태를 받아
- * target이라는 요소를 만들고
- * app에 target달아주기
- *
- * state 변경시 상태 변경, 리렌더
- *
- * 렌더링은 타겟의 HTML을
- */
-
-// html요소중 id 속성이 있는 요소는 map을 사용할 때 ""로 고정해줘야함

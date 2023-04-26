@@ -9,47 +9,48 @@ class App {
       memos: JSON.parse(localStorage.getItem("allMemo")) ?? [],
     };
 
-    const writeMemo = new WriteMemo({
-      $target: this.$target,
-      state: this.state,
-      addMemo: this.addMemo,
-    });
-    const showMemo = new ShowMemo({
-      $target: this.$target,
-      state: this.state,
-      removeMemo: this.removeMemo,
-    });
-
-    this.setState = (newState) => {
-      this.state = {
-        ...this.state,
-        ...newState,
-      };
-      writeMemo.setState({
-        memos: this.state.memos,
-      });
-      showMemo.setState({
-        memos: this.state.memos,
-      });
-    };
+    this.render();
   }
 
-  // 이벤트
-  addMemo = (newMemo) => {
-    this.setState({ memos: [...this.state.memos, newMemo] });
-    localStorage.setItem("allMemo", JSON.stringify(this.state.memos));
-  };
+  setState(newState) {
+    this.state = {
+      ...this.state,
+      ...newState,
+    };
+    this.render();
+  }
 
-  removeMemo = (event) => {
-    if (event.target.closest(".remove-btn")) {
-      const id = event.target.closest("button").id;
-      this.setState({
-        memos: this.state.memos.filter((memo) => memo.len !== +id),
-      });
-      localStorage.setItem("allMemo", JSON.stringify(this.state.memos));
-      console.log("삭제됨");
-    }
-  };
+  render() {
+    this.$target.innerHTML = `
+    <section class="write-section"></section>
+    <section class="view-section"></section>
+    `;
+
+    new WriteMemo({
+      $target: this.$target.querySelector(".write-section"),
+      state: this.state,
+      addMemo: this.addMemo.bind(this),
+    });
+    new ShowMemo({
+      $target: this.$target.querySelector(".view-section"),
+      state: this.state,
+      removeMemo: this.removeMemo.bind(this),
+    });
+  }
+
+  addMemo(newMemo) {
+    this.setState({
+      memos: [...this.state.memos, newMemo],
+    });
+    localStorage.setItem("allMemo", JSON.stringify(this.state.memos));
+  }
+
+  removeMemo(id) {
+    this.setState({
+      memos: this.state.memos.filter((memo) => memo.id !== +id),
+    });
+    localStorage.setItem("allMemo", JSON.stringify(this.state.memos));
+  }
 }
 
 export default App;
